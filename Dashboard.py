@@ -514,14 +514,13 @@ class ArmeeEgypteAnalyseApprofondie:
         cols = st.columns(len(df_equipements))
         for idx, row in df_equipements.iterrows():
             with cols[idx]:
-                avec cols[idx]:
-                    croissance = ((row['Quantite_2024'] - row['Quantite_2012']) / row['Quantite_2012']) * 100
-                    
-                    st.markdown(f"**{row['Type']}**")
-                    st.metric("2024", f"{row['Quantite_2024']:,}")
-                    st.metric("Croissance", f"{croissance:+.1f}%")
-                    st.progress(row['Taux_Modernite'] / 100, 
-                               text=f"Modernité: {row['Taux_Modernite']}%")
+                croissance = ((row['Quantite_2024'] - row['Quantite_2012']) / row['Quantite_2012']) * 100
+                
+                st.markdown(f"**{row['Type']}**")
+                st.metric("2024", f"{row['Quantite_2024']:,}")
+                st.metric("Croissance", f"{croissance:+.1f}%")
+                st.progress(row['Taux_Modernite'] / 100, 
+                           text=f"Modernité: {row['Taux_Modernite']}%")
     
     def analyser_comparaison_regionale(self):
         """Analyse comparative avec les armées régionales"""
@@ -601,7 +600,7 @@ class ArmeeEgypteAnalyseApprofondie:
             
             cols = st.columns(len(indicateurs))
             for idx, col in enumerate(indicateurs):
-                avec cols[idx]:
+                with cols[idx]:
                     st.metric(
                         label=col.replace('_', ' '),
                         value=f"{position_egypte[col]['valeur']:,.0f}",
@@ -683,7 +682,7 @@ class ArmeeEgypteAnalyseApprofondie:
         }
         
         for idx, (scenario, details) in enumerate(scenarios_detail.items()):
-            avec cols[idx]:
+            with cols[idx]:
                 st.markdown(f"### {scenario}")
                 st.markdown(f"**{details['description']}**")
                 st.markdown(f"• Investissement: {details['investissement']}")
@@ -821,7 +820,7 @@ class ArmeeEgypteAnalyseApprofondie:
         
         # Calcul des taux de croissance annuels
         df_capacites['Croissance_Readiness'] = df_capacites['Readiness_Operative'].pct_change() * 100
-        df_capacites['Croissance_Exercices'] = df_capacites['Exercises_Combines'].pct_change() * 100
+        df_capacites['Croissance_Exercices'] = df_capacites['Exercices_Combines'].pct_change() * 100
         
         fig = go.Figure()
         
@@ -889,7 +888,7 @@ class ArmeeEgypteAnalyseApprofondie:
         }
         
         for idx, (categorie, elements) in enumerate(swot_data.items()):
-            avec cols[idx]:
+            with cols[idx]:
                 st.markdown(f"### {categorie.upper()}")
                 for element in elements:
                     st.markdown(f"• {element}")
